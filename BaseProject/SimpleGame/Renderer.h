@@ -18,6 +18,8 @@ public:
 
 	void DrawParticle();
 
+	void DrawParticleCloud();
+
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
 	bool ReadFile(char* filename, std::string* target);
@@ -26,7 +28,9 @@ private:
 	void CreateVertexBufferObjects();
 	void GetGLPosition(float x, float y, float* newX, float* newY);
 
-	float m_ParticleTime = 0;
+	void CreateParticleCloud(int numParticles);
+
+	
 
 	bool m_Initialized = false;
 
@@ -40,5 +44,10 @@ private:
 
 	GLuint m_ParticleShader = 0;
 	GLuint m_ParticleVBO = 0;
+	GLuint m_ParticleCloudVBO = 0;
+	GLuint m_ParticleCloudVertexCount = 0;
+	
+
+	float m_ParticleTime = 0;
 };
 

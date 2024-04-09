@@ -213,17 +213,14 @@ void Renderer::CreateParticleCloud(int numParticles)
 	centerX = 0.f;
 	centerY = 0.f;
 
-	float velocityX, velocityY, velocityZ;
-	velocityX = 0.f;
-	velocityY = 0.f;
-	velocityZ = 0.f;
+	float velocityX = 0.f, velocityY = 0.f, velocityZ = 0.f;
 
 	float startTime = 0.f;
 	float lifeTime = 0.f;
 	float amp = 0.f, period = 0.f;
 	float value = 0.f;
 
-	float size = 0.01f;
+	float size = 0.005f;
 	int particleCount = numParticles;
 	int vertexCount = particleCount * 6;
 	int floatCount = vertexCount * (3+3+1+1+1+1+1);	// x, y, z, startTime, velocityX, velocityY, velocityZ, lifeTime, amp, period, value
@@ -237,14 +234,14 @@ void Renderer::CreateParticleCloud(int numParticles)
 		float velocityScale = 0.2f;
 		//centerX = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
 		//centerY = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
-		velocityX = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
-		velocityY = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
+		//velocityX = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
+		//velocityY = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
 		velocityZ = ((float)rand() / (float)RAND_MAX) * 2.f - 1.f;
 		velocityX *= velocityScale;
 		velocityY *= velocityScale;
 		velocityZ *= velocityScale;
-		startTime = ((float)rand() / (float)RAND_MAX) * 6.f;
-		lifeTime = ((float)rand() / (float)RAND_MAX) * 0.5f + 0.5f;
+		startTime = ((float)rand() / (float)RAND_MAX) * 10.f;
+		lifeTime = ((float)rand() / (float)RAND_MAX) + 1.0f;
 		amp = ((((float)rand() / (float)RAND_MAX) - 0.5f)*2.f);
 		period = ((float)rand() / (float)RAND_MAX);
 		value = ((float)rand() / (float)RAND_MAX);
@@ -252,9 +249,9 @@ void Renderer::CreateParticleCloud(int numParticles)
 		// Test
 		//centerX = -1.f;
 		//centerY = 0.f;
-		/*velocityX = 1.f;
-		velocityY = 0.5f;
-		velocityZ = 0.f;*/
+		//velocityX = 1.f;
+		velocityY = -0.01f;
+		//velocityZ = 0.f;
 		//startTime = 0.f;
 		//lifeTime = 2.f;
 
@@ -378,6 +375,9 @@ void Renderer::DrawParticleCloud()
 
 	int ulPeriod = glGetUniformLocation(shader, "u_Period");
 	glUniform1f(ulPeriod, 2.0);
+
+	int ulAcc = glGetUniformLocation(shader, "u_Acc");
+	glUniform2f(ulAcc, cos(m_ParticleTime/10.f), sin(m_ParticleTime/10.f));
 
 
 	int attribPosition = glGetAttribLocation(shader, "a_Position");

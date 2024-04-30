@@ -1,7 +1,6 @@
 #version 330
 
 in vec3 a_Position;
-
 out vec4 v_Color;
 
 uniform float u_Time;

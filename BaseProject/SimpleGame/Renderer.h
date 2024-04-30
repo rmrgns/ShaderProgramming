@@ -21,6 +21,7 @@ public:
 	void DrawParticleCloud();
 	void DrawFSSandbox();
 	void DrawGridMesh();
+	void DrawTextureSandBox();
 
 private:
 	void Initialize(int windowSizeX, int windowSizeY);
@@ -34,7 +35,9 @@ private:
 
 	void CreateGridMesh(int x, int y);
 
+	GLuint CreatePngTexture(char* filePath, GLuint samplingMethod);
 	
+
 
 	bool m_Initialized = false;
 
@@ -63,6 +66,11 @@ private:
 	GLuint m_GridMeshVBO = 0;
 	GLuint m_GridMeshVertexCount = 0;
 	float m_GridMeshTime = 0;
+
+	GLuint m_RGBTexture = 0;
+	GLuint m_TextureSandBoxShader = 0;
+	GLuint m_TextureSandBoxVBO = 0;
+	float m_TextureSandBoxTime = 0;
 
 };
 
